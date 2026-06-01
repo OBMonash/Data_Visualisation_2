@@ -1,0 +1,47 @@
+{
+    "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+    "title": "Male titled players by country (grouped by title)",
+    "width": 600,
+    "height": 420,
+    "data": {
+        "url": "rated_player_count.csv",
+        "format": {"type": "csv"}
+    },
+    "transform": [
+        {
+            "fold": ["CM_count", "FM_count", "IM_count", "GM_count"],
+            "as": ["Title", "Count"]
+        },
+        {
+            "filter": "indexof(['Russia', 'India', 'United States of America', 'China', 'Poland', 'Germany', 'Australia'], datum.Country) >= 0"
+        }
+    ],
+    "mark": {"type": "bar"},
+    "encoding": {
+        "x": {
+            "field": "Country",
+            "type": "nominal",
+            "axis": {"labelOverlap": "parity"}
+        },
+        "y": {
+            "field": "Count", 
+            "type": "quantitative", 
+            "axis": {"title": "Count"}
+        },
+        "color": {
+            "field": "Title", 
+            "type": "nominal", 
+            "legend": {"title": "Title"}, 
+            "sort": ["CM_count","FM_count","IM_count","GM_count"]
+        },
+        "xOffset": {
+            "field": "Title",
+            "sort": ["CM_count","FM_count","IM_count","GM_count"]
+        },
+        "tooltip": [
+            {"field": "Country", "type": "nominal"},
+            {"field": "Title", "type": "nominal"},
+            {"field": "Count", "type": "quantitative"}
+        ]
+    }
+}

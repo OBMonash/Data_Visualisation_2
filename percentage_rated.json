@@ -1,0 +1,33 @@
+{
+    "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+    "data": {"url": "rated_player_count.csv"},
+    "width": 1000,
+    "height": 400,
+    "title": "percentage_rated",
+    "mark": "bar",
+    "transform": [
+        {
+            "filter": "datum.rating_average >= 2000"
+        },
+        {
+            "calculate": "datum.all_master_player_count/datum.population * 100",
+            "as": "percentage_rated"
+            
+        }
+    ],
+    "encoding": {
+        "x":{
+            "field": "Country",
+            "type": "nominal",
+            "axis": {
+                "title": "Country"
+            }
+        },
+        "y":{
+            "field": "percentage_rated",
+            "type": "quantitative",
+            "scale": {"type": "linear"},
+            "axis": {"title": "Percentage of Rated Players"}
+        }
+    }
+}

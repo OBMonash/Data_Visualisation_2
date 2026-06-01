@@ -1,0 +1,57 @@
+h1 {
+    font-family: 'Felipa', serif;
+    font-size: 48px;
+    color: #000000;
+    text-align: left;
+}
+
+h2 {
+    font-family: 'Nunito', sans-serif;
+    font-size: 22px;
+    color: #000000;
+    text-align: left;
+}
+
+p {
+    font-family: 'georgia', serif;
+    font-size: 12px;
+    color: #000000;
+}
+
+body {
+    font-family: 'helvetica', sans-serif;
+    font-size: 9px;
+    color: #000000;
+    background-color: #e9eef1;
+}
+
+#checkerboard_bg {
+    background: repeating-conic-gradient(
+        #93aab6 0% 25%,
+        #e9eef1 0% 50%
+    );
+    background-size: 150px 150px;
+}
+
+.outer{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+}
+
+.inner img{
+    height: 30vh;
+}
+
+.felipa-regular {
+  font-family: "Felipa", serif;
+  font-weight: 400;
+  font-style: normal;
+}
+
+.nunito {
+  font-family: "Nunito", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 400;
+  font-style: normal;
+}

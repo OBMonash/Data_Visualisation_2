@@ -1,0 +1,60 @@
+{
+    "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+    "title": "placeholder",
+    "width": 500,
+    "height": 400,
+    "data": {
+        "url": "rated_player_count.csv",
+        "format": {"type": "csv"}
+    },
+    "scales": [
+        {
+            "name": "yscale",
+            "type": "band",
+            "domain": {"data": "table", "field": "Country"},
+            "range": "height",
+            "padding": 0.1
+        },
+        {
+            "name": "xscale",
+            "type": "linear",
+            "domain": {"data": "table", "field": "all_master_player_count"},
+            "range": "width"
+        }
+    ],
+    "axes": [
+        {"orient": "left", "scale": "yscale", "title": "Country"},
+        {"orient": "bottom", "scale": "xscale", "title": "Number of Master Players"}
+    ],
+    "marks": [
+        {
+            "type": "group",
+            "from": {
+                "facet": {
+                    "data": {"url": "rated_player_count.csv", "format": {"type": "csv"}},
+                    "name": "facet",
+                    "groupby": "Country"
+                }
+            },
+            "encode": {
+                "enter": {
+                    "y": {"scale": "yscale", "field": "Country"}
+                }
+            },
+            "signals": [
+                {
+                    "name": "height",
+                    "update": "bandwidth('yscale')"
+                }
+            ],
+            "scales": [
+                {
+                    "name": "pos",
+                    "type": "band",
+                    "range": "height",
+                    "domain":{"data": "facet", "field": "Country"}
+                }
+            ]
+        }
+    ]
+    }

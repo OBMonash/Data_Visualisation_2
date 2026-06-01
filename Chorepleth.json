@@ -1,0 +1,43 @@
+{
+    "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+    "title": {"text": "Master Players Around the World", "fontSize": 16, "font": "Nunito, sans-serif"},
+    "width": 500,
+    "height": 250,
+    "background": "#e9eef1",
+    "projection": {"type": "equalEarth"},
+    "data": {
+        "url": "world-map.topojson", 
+        "format": {
+            "type": "topojson", "feature": "gj" 
+        }
+    },
+    "transform": [{
+        "lookup": "properties.NAME",
+        "from": {
+            "data": {
+                "url": "rated_player_count.csv",
+                "format": {"type": "csv"}
+            },
+            "key": "Country",
+            "fields": ["all_master_player_count"]
+        }
+    }
+    ],
+    "mark": {"type": "geoshape"},
+    "encoding": {
+        "color": {
+            "field": "all_master_player_count",
+            "type": "quantitative",
+            "scale": {
+                "type": "threshold",
+                "domain": [25, 50, 100, 250, 500, 1000],
+                "scheme": "redpurple"
+            },
+            "legend": {"title": "Number of Titled Players", "type": "symbol", "symbolType": "square"}
+        },
+        "tooltip": [
+            {"field": "properties.NAME", "type": "nominal", "title": "Country"},
+            {"field": "all_master_player_count", "type": "quantitative", "title": "Number of Titled Players"}
+        ]
+    }
+}
